@@ -4,7 +4,13 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/TutorialScene.unity
+    guid: 40f7e6bb11f56414ab774a5e53c5a5f3
+  - enabled: 1
+    path: Assets/Scenes/BilliardRoomScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 863e3034303a6d04fa10ec351889ecf9, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 887253f93da962c489b82f162b68d3f1, type: 2}

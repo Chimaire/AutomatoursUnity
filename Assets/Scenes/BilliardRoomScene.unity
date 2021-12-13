@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18004736, g: 0.22542775, b: 0.30677456, a: 1}
+  m_IndirectSpecularColor: {r: 0.46141267, g: 0.5121163, b: 0.58980316, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2867,12 +2867,12 @@ MonoBehaviour:
     m_Name: Main Camera - TPD - Position
     m_Type: 0
     m_ExpectedControlType: Vector3
-    m_Id: 
+    m_Id: fefe3e2b-d2d6-4930-adab-0907b7bfe0bb
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: 
+      m_Id: 99fe36e5-d70b-42d3-a62a-f5785f9a94ec
       m_Path: <XRHMD>/centerEyePosition
       m_Interactions: 
       m_Processors: 
@@ -2883,12 +2883,12 @@ MonoBehaviour:
     m_Name: Main Camera - TPD - Rotation
     m_Type: 0
     m_ExpectedControlType: Quaternion
-    m_Id: 
+    m_Id: 17f6c4b5-3219-4aff-a143-aabceb33dd9b
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: 
+      m_Id: c845fa49-917f-4239-999a-5fe812642101
       m_Path: <XRHMD>/centerEyeRotation
       m_Interactions: 
       m_Processors: 
@@ -5963,3 +5963,64 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1001 &3354391455927505041
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3354391456476859296, guid: c0c6a15ae74c35c4da93df7d648426bb, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 963194225}
+    - target: {fileID: 3354391456476859297, guid: c0c6a15ae74c35c4da93df7d648426bb, type: 3}
+      propertyPath: m_Name
+      value: Owl
+      objectReference: {fileID: 0}
+    - target: {fileID: 3354391456476859299, guid: c0c6a15ae74c35c4da93df7d648426bb, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3354391456476859299, guid: c0c6a15ae74c35c4da93df7d648426bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.332
+      objectReference: {fileID: 0}
+    - target: {fileID: 3354391456476859299, guid: c0c6a15ae74c35c4da93df7d648426bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3354391456476859299, guid: c0c6a15ae74c35c4da93df7d648426bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3354391456476859299, guid: c0c6a15ae74c35c4da93df7d648426bb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3354391456476859299, guid: c0c6a15ae74c35c4da93df7d648426bb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3354391456476859299, guid: c0c6a15ae74c35c4da93df7d648426bb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3354391456476859299, guid: c0c6a15ae74c35c4da93df7d648426bb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3354391456476859299, guid: c0c6a15ae74c35c4da93df7d648426bb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3354391456476859299, guid: c0c6a15ae74c35c4da93df7d648426bb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3354391456476859299, guid: c0c6a15ae74c35c4da93df7d648426bb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c0c6a15ae74c35c4da93df7d648426bb, type: 3}
