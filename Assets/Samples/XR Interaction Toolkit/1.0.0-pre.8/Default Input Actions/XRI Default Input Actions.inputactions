@@ -585,6 +585,30 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Call Robot",
+                    "type": "Button",
+                    "id": "050858a7-ef1c-48da-b653-0ada2080c6b4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Start Robot",
+                    "type": "Button",
+                    "id": "381723e3-e512-49ca-8b69-07cfe4afc81a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Stop Robot",
+                    "type": "Button",
+                    "id": "3262089c-c75a-4800-9e5b-97a644a26700",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -895,6 +919,39 @@
                     "action": "Translate Anchor",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "5b60c41d-a1d2-490d-aa88-85c33b5d19f7",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "Call Robot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "696bbcc3-c29b-4ed6-86f7-9d43bd926d4a",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "Start Robot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "87766b9b-9eb9-4da5-91fd-05a1e7ee020b",
+                    "path": "<XRController>{RightHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "Stop Robot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
