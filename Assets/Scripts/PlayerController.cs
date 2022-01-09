@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public bool atExhibit = false;
-    private GameObject currentExhibit;
+    public GameObject currentExhibit;
     public AgentTest agentScript;
     public bool inDoorway = false;
     public InputActionReference callRobotReference = null;

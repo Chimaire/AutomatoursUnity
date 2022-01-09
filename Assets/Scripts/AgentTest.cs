@@ -15,6 +15,8 @@ public class AgentTest : MonoBehaviour
 
     public OwlState currentState = OwlState.Greeting;
 
+    GameObject CurrentAudioInstance;
+
     public enum OwlState
     {
         Greeting, Moving, WaitingForPlayerInput, Explaining, ExplanationFinished
@@ -30,6 +32,16 @@ public class AgentTest : MonoBehaviour
 
     void Update()
     {
+        agent.destination = goalPosition;
+        if (currentState == OwlState.Explaining)
+        {
+            if (CurrentAudioInstance.GetComponent<AudioSource>().isPlaying == false)
+            {
+                Debug.Log("Explanation finished");
+                currentState = OwlState.ExplanationFinished;
+                Destroy(CurrentAudioInstance);
+            }
+        }
         
 
         if(currentState == OwlState.Explaining)
@@ -60,8 +72,7 @@ public class AgentTest : MonoBehaviour
                 }
                 else
                 {
-                    currentState = OwlState.Explaining;
-                    //TODO: Trigger explanation
+                    StartExplanation(player.GetComponent<PlayerController>().currentExhibit);
                 }
             }
             agent.updateRotation = false;
@@ -80,7 +91,6 @@ public class AgentTest : MonoBehaviour
             currentState = OwlState.Moving;
             agent.updateRotation = true;
         }
-        agent.destination = goalPosition;
     }
 
     public void SetGoal(Vector3 position)
@@ -95,13 +105,21 @@ public class AgentTest : MonoBehaviour
 
     public void StartExplanation(GameObject Exhibit)
     {
+        if (CurrentAudioInstance != null)
+        {
+            Destroy(CurrentAudioInstance);
+        }
         Debug.Log("Owl Explanation Started for Exhibit: " + Exhibit.name);
         currentState = OwlState.Explaining;
+        ExhibitInfo info = Exhibit.GetComponent<ExhibitInfo>();
+        CurrentAudioInstance = Instantiate(info.AudioPrefab, transform);
+        CurrentAudioInstance.GetComponent<AudioSource>().Play();
     }
 
     public void StopExplanation()
     {
         Debug.Log("Explanation Stopped");
         currentState = OwlState.ExplanationFinished;
+        Destroy(CurrentAudioInstance);
     }
 }

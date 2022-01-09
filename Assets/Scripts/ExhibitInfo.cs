@@ -6,6 +6,7 @@ public class ExhibitInfo : MonoBehaviour
 {
     public Transform owlPos1;
     public Transform owlPos2;
+    public GameObject AudioPrefab;
 
     // Start is called before the first frame update
     void Start()
