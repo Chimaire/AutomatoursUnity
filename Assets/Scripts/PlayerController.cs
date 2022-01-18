@@ -97,8 +97,13 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Exhibit"))
         {
             atExhibit = true;
+            if(currentExhibit != null)
+            {
+                currentExhibit.GetComponent<ExhibitInfo>().DisableOutline();
+            }
             currentExhibit = other.gameObject;
-            if(SceneLoader.currentMode == SceneLoader.GameMode.NoControl)
+            currentExhibit.GetComponent<ExhibitInfo>().EnableOutline();
+            if (SceneLoader.currentMode == SceneLoader.GameMode.NoControl)
             {
                 //get the correct owl position from the exhibit
                 if(agentScript.currentState != AgentTest.OwlState.Explaining)
@@ -124,6 +129,10 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Exhibit"))
         {
             atExhibit = false;
+            if (currentExhibit != null)
+            {
+                currentExhibit.GetComponent<ExhibitInfo>().DisableOutline();
+            }
             currentExhibit = null;
             if(agentScript.currentState == AgentTest.OwlState.WaitingForPlayerInput)
             {

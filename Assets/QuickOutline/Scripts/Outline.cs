@@ -59,7 +59,7 @@ public class Outline : MonoBehaviour {
   [SerializeField]
   private Color outlineColor = Color.white;
 
-  [SerializeField, Range(0f, 10f)]
+  [SerializeField, Range(0f, 100f)]
   private float outlineWidth = 2f;
 
   [Header("Optional")]
@@ -94,17 +94,20 @@ public class Outline : MonoBehaviour {
 
     // Retrieve or generate smooth normals
     LoadSmoothNormals();
-    var outline = gameObject.AddComponent<Outline>();
+    var outline = gameObject.GetComponent<Outline>();
 
     outline.OutlineMode = Mode.OutlineAll;
     outline.OutlineColor = Color.cyan;
-    outline.OutlineWidth = 5f;
-    
+    outline.OutlineWidth = 40f;
+
+        outline.enabled = false;
+    /*
     if (Input.GetKey("space"))
     {
       needsUpdate = true;
       outline.enabled = true;
-    }
+    }*/
+    
     // Apply material properties immediately
     // needsUpdate = true;
   }
