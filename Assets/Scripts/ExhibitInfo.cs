@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ExhibitInfo : MonoBehaviour
 {
-    public Transform owlPos1;
-    public Transform owlPos2;
+    public GameObject owlPos1;
+    public GameObject owlPos2;
     public GameObject AudioPrefab;
 
     // Start is called before the first frame update
@@ -20,10 +20,10 @@ public class ExhibitInfo : MonoBehaviour
         
     }
 
-    public Transform getOwlPos(Vector3 pos)
+    public GameObject getOwlPos(Vector3 pos)
     {
         //if the player is closer to one of the positions, the owl should move to the other one. 
-        if(Vector3.Distance(pos, owlPos1.position) < Vector3.Distance(pos, owlPos2.position))
+        if(Vector3.Distance(pos, owlPos1.transform.position) < Vector3.Distance(pos, owlPos2.transform.position))
         {
             return owlPos2;
         }

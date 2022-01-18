@@ -33,8 +33,8 @@ public class PlayerController : MonoBehaviour
     {
         if (atExhibit && (SceneLoader.currentMode == SceneLoader.GameMode.FullControl) && agentScript.currentState != AgentTest.OwlState.WaitingForPlayerInput)
         {
-            setOwlState(AgentTest.OwlState.Moving);
-            agentScript.SetGoal(currentExhibit.GetComponent<ExhibitInfo>().getOwlPos(this.transform.position).position);
+            agentScript.SetOwlState(AgentTest.OwlState.Moving);
+            agentScript.SetGoal(currentExhibit.GetComponent<ExhibitInfo>().getOwlPos(this.transform.position));
         }
 
     }
@@ -79,16 +79,16 @@ public class PlayerController : MonoBehaviour
                 //get the correct owl position from the exhibit
                 if(agentScript.currentState != AgentTest.OwlState.Explaining)
                 {
-                    setOwlState(AgentTest.OwlState.Moving);
-                    agentScript.SetGoal(other.GetComponent<ExhibitInfo>().getOwlPos(this.transform.position).position);
+                    agentScript.SetOwlState(AgentTest.OwlState.Moving);
+                    agentScript.SetGoal(other.GetComponent<ExhibitInfo>().getOwlPos(this.transform.position));
                 }
             }
             else if (SceneLoader.currentMode == SceneLoader.GameMode.PartialControl)
             {
                 if (agentScript.currentState != AgentTest.OwlState.Explaining)
                 {
-                    setOwlState(AgentTest.OwlState.Moving);
-                    agentScript.SetGoal(other.GetComponent<ExhibitInfo>().getOwlPos(this.transform.position).position);
+                    agentScript.SetOwlState(AgentTest.OwlState.Moving);
+                    agentScript.SetGoal(other.GetComponent<ExhibitInfo>().getOwlPos(this.transform.position));
                 }
             }
             //  owlScript.SetGoal(this.transform);
@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
             currentExhibit = null;
             if(agentScript.currentState == AgentTest.OwlState.WaitingForPlayerInput)
             {
-                setOwlState(AgentTest.OwlState.Greeting);
+                agentScript.SetOwlState(AgentTest.OwlState.Greeting);
             }
             
         }
@@ -114,10 +114,7 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    public void setOwlState(AgentTest.OwlState state)
-    {
-        agentScript.currentState = state;
-    }
+    
 
 
     public void StartTour()
