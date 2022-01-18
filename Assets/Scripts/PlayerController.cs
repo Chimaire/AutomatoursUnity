@@ -12,12 +12,18 @@ public class PlayerController : MonoBehaviour
     public InputActionReference callRobotReference = null;
     public InputActionReference startRobotReference = null;
     public InputActionReference stopRobotReference = null;
+    public Animator RedButtonAnim;
+    public Animator GreenButtonAnim;
     // Start is called before the first frame update
     private void Awake()
     {
         callRobotReference.action.started += CallOver;
         startRobotReference.action.started += StartRobot;
         stopRobotReference.action.started += StopRobot;
+
+        callRobotReference.action.canceled += GreenButtonUp;
+        startRobotReference.action.canceled += GreenButtonUp;
+        stopRobotReference.action.canceled += RedButtonUp;
 
     }
 
@@ -27,10 +33,26 @@ public class PlayerController : MonoBehaviour
         callRobotReference.action.started -= CallOver;
         startRobotReference.action.started -= StartRobot;
         stopRobotReference.action.started -= StopRobot;
+
+        callRobotReference.action.canceled -= GreenButtonUp;
+        startRobotReference.action.canceled -= GreenButtonUp;
+        stopRobotReference.action.canceled -= RedButtonUp;
+    }
+
+    private void GreenButtonUp(InputAction.CallbackContext context)
+    {
+        GreenButtonAnim.SetTrigger("Lift");
+
+    }
+    private void RedButtonUp(InputAction.CallbackContext context)
+    {
+
+        RedButtonAnim.SetTrigger("Lift");
     }
 
     private void CallOver(InputAction.CallbackContext context)
     {
+        GreenButtonAnim.SetTrigger("Press");
         if (atExhibit && (SceneLoader.currentMode == SceneLoader.GameMode.FullControl) && agentScript.currentState != AgentTest.OwlState.WaitingForPlayerInput)
         {
             agentScript.SetOwlState(AgentTest.OwlState.Moving);
@@ -41,6 +63,7 @@ public class PlayerController : MonoBehaviour
 
     private void StartRobot(InputAction.CallbackContext context)
     {
+        GreenButtonAnim.SetTrigger("Press");
         if ((SceneLoader.currentMode == SceneLoader.GameMode.FullControl) || (SceneLoader.currentMode == SceneLoader.GameMode.PartialControl))
         {
             if(agentScript.currentState == AgentTest.OwlState.WaitingForPlayerInput)
@@ -52,6 +75,7 @@ public class PlayerController : MonoBehaviour
 
     private void StopRobot(InputAction.CallbackContext context)
     {
+        RedButtonAnim.SetTrigger("Press");
         if ((SceneLoader.currentMode == SceneLoader.GameMode.FullControl))
         {
             if (agentScript.currentState == AgentTest.OwlState.Explaining)
