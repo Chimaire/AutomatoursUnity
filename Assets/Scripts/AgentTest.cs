@@ -13,9 +13,12 @@ public class AgentTest : MonoBehaviour
     public Transform owlHome;
     public float lookSpeed;
     public Animator animator;
+    private bool listenStopped = false;
+    public float listenTime = 0.0f;
+    public float cliplength = 0.0f;
 
     public OwlState currentState = OwlState.Greeting;
-
+    public GameObject currentOwlExhibit;
     GameObject CurrentAudioInstance;
     private float lookTimer = 0.0f;
     private char currentPointDir = 'L';
@@ -110,6 +113,11 @@ public class AgentTest : MonoBehaviour
         //Debug.Log(agent.remainingDistance);
         if (currentState == OwlState.Explaining)
         {
+            if (!listenStopped)
+            {
+                listenTime += Time.deltaTime;
+            }
+
             if (CurrentAudioInstance.GetComponent<AudioSource>().isPlaying == false)
             {
                 Debug.Log("Explanation finished");
@@ -146,7 +154,8 @@ public class AgentTest : MonoBehaviour
                     }
                     else
                     {
-                        StartExplanation(player.GetComponent<PlayerController>().currentExhibit);
+                        currentOwlExhibit = player.GetComponent<PlayerController>().currentExhibit;
+                        StartExplanation(currentOwlExhibit);
                     }
                 }
                 agent.updateRotation = false;
@@ -222,16 +231,23 @@ public class AgentTest : MonoBehaviour
 
     public void StartExplanation(GameObject Exhibit)
     {
+        currentOwlExhibit = Exhibit;
         if (CurrentAudioInstance != null)
         {
             Destroy(CurrentAudioInstance);
+            cliplength = 0.0f;
         }
         Debug.Log("Owl Explanation Started for Exhibit: " + Exhibit.name);
         SetOwlState(OwlState.Explaining);
         ExhibitInfo info = Exhibit.GetComponent<ExhibitInfo>();
         CurrentAudioInstance = Instantiate(info.AudioPrefab, transform);
-        CurrentAudioInstance.GetComponent<AudioSource>().Play();
+        AudioSource src = CurrentAudioInstance.GetComponent<AudioSource>();
+        src.Play();
+        cliplength = src.clip.length;
         PointAtExhibit();
+        listenTime = 0.0f;
+        listenStopped = false;
+        player.GetComponent<PlayerController>().checkIfListening = true;
     }
 
     public void StopExplanation()
@@ -245,36 +261,52 @@ public class AgentTest : MonoBehaviour
     {
         if(state == OwlState.Moving && currentState != OwlState.Moving)
         {
+            //Owl comes over to player (only if not already moving)
             MakeHappy();
             animator.SetTrigger("FlyStart");
             Debug.Log("FlyStart");
         }
         else if (currentState == OwlState.Moving && state == OwlState.WaitingForPlayerInput)
         {
+            //Owl has reached the destination
             animator.SetTrigger("FlyStop");
-            Debug.Log("FlyStop");
+            //Debug.Log("FlyStop");
         }
         else if (currentState == OwlState.Moving && state == OwlState.Explaining)
         {
+            //Owl starts explanation, directly from flying
             MakeHappy();
             animator.SetTrigger("FlyStop");
             animator.SetTrigger("Talk");
 
-            Debug.Log("FlyStopTalk");
+            //Debug.Log("FlyStopTalk");
         }else if(currentState == OwlState.WaitingForPlayerInput && state == OwlState.Explaining)
         {
+            //Owl starts explanation, while waiting for input
             MakeHappy();
             animator.SetTrigger("Talk");
         }
 
         
         if (state == OwlState.ExplanationFinished) {
+            //the owl stopped explaining
             animator.SetTrigger("TalkStop");
+            player.GetComponent<PlayerController>().checkIfListening = false;
+            SceneLoader.AddEntryToList(currentOwlExhibit.GetComponent<ExhibitInfo>(), listenTime, cliplength);
+            cliplength = 0.0f;
+            currentOwlExhibit = null;
 
-            Debug.Log("TalkStop");
+            //Debug.Log("TalkStop");
         }
 
         currentState = state;
+
+    }
+
+    public void StopListenCountdown(float offset)
+    {
+        listenStopped = true;
+        listenTime -= offset;
 
     }
 }

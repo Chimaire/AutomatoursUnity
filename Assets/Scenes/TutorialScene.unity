@@ -460,7 +460,7 @@ GameObject:
   - component: {fileID: 63194653}
   - component: {fileID: 63194654}
   m_Layer: 0
-  m_Name: ExhibitContainer
+  m_Name: Tutorial1
   m_TagString: Exhibit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -493,7 +493,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owlPos1: {fileID: 71304014}
   owlPos2: {fileID: 71304014}
-  AudioPrefab: {fileID: 4859960616500879737, guid: f0141762f220a864089d4443f84eaa1b, type: 3}
+  AudioPrefab: {fileID: 5388718239859832758, guid: d260af37e6b4d984a8262e7e84dd450d, type: 3}
   Indicator: {fileID: 4756510038377080279}
 --- !u!33 &63194655
 MeshFilter:
@@ -781,6 +781,10 @@ MonoBehaviour:
   stopRobotReference: {fileID: 1799514711214725381, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   RedButtonAnim: {fileID: 5147073188516357470}
   GreenButtonAnim: {fileID: 283855972138682991}
+  listenTime: 0
+  stepAwayTimer: 0
+  hasSteppedAway: 0
+  checkIfListening: 0
 --- !u!54 &167484417
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1812,7 +1816,10 @@ MonoBehaviour:
   owlHome: {fileID: 0}
   lookSpeed: 0
   animator: {fileID: 0}
+  listenTime: 0
+  cliplength: 0
   currentState: 0
+  currentOwlExhibit: {fileID: 0}
   Owlhead: {fileID: 0}
   OwlNeutral: {fileID: 0}
   OwlBlink: {fileID: 0}
@@ -2410,7 +2417,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2884073951933851911, guid: 935b346075633514d85739d25a0202c9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.078
       objectReference: {fileID: 0}
     - target: {fileID: 2884073951933851911, guid: 935b346075633514d85739d25a0202c9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2418,7 +2425,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2884073951933851911, guid: 935b346075633514d85739d25a0202c9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.059
       objectReference: {fileID: 0}
     - target: {fileID: 2884073951933851911, guid: 935b346075633514d85739d25a0202c9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6708,7 +6715,7 @@ GameObject:
   - component: {fileID: 1755598249}
   - component: {fileID: 1755598248}
   m_Layer: 0
-  m_Name: ExhibitContainer (1)
+  m_Name: Tutorial2
   m_TagString: Exhibit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6728,7 +6735,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owlPos1: {fileID: 1479846987}
   owlPos2: {fileID: 2084426922}
-  AudioPrefab: {fileID: 8195734353783949072, guid: f022cdabb54618a47bd22ee15e37fadb, type: 3}
+  AudioPrefab: {fileID: 5388718239859832758, guid: e25111ce36923aa49a332ba88d6d50da, type: 3}
   Indicator: {fileID: 619977242}
 --- !u!65 &1755598249
 BoxCollider:
@@ -8037,15 +8044,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2884073951933851911, guid: 935b346075633514d85739d25a0202c9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.0874
       objectReference: {fileID: 0}
     - target: {fileID: 2884073951933851911, guid: 935b346075633514d85739d25a0202c9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.0077
       objectReference: {fileID: 0}
     - target: {fileID: 2884073951933851911, guid: 935b346075633514d85739d25a0202c9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.0847
       objectReference: {fileID: 0}
     - target: {fileID: 2884073951933851911, guid: 935b346075633514d85739d25a0202c9, type: 3}
       propertyPath: m_LocalRotation.w

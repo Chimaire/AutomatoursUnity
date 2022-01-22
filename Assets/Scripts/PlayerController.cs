@@ -14,6 +14,11 @@ public class PlayerController : MonoBehaviour
     public InputActionReference stopRobotReference = null;
     public Animator RedButtonAnim;
     public Animator GreenButtonAnim;
+
+    public float listenTime = 0;
+    public float stepAwayTimer = 0;
+    public bool hasSteppedAway = false;
+    public bool checkIfListening = false;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -70,6 +75,10 @@ public class PlayerController : MonoBehaviour
             {
                 agentScript.StartExplanation(currentExhibit);
             }
+            if (SceneLoader.currentMode == SceneLoader.GameMode.PartialControl)
+            {
+                checkIfListening = true;
+            }
         }
     }
 
@@ -89,7 +98,23 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (checkIfListening && (SceneLoader.currentMode != SceneLoader.GameMode.FullControl))
+        {
+            if (hasSteppedAway)
+            {
+                if (stepAwayTimer > 0)
+                {
+                    stepAwayTimer -= Time.deltaTime;
+                }
+                else
+                {
+                    //We have a fail
+                    //log data to json
+                    checkIfListening = false;
+                    agentScript.StopListenCountdown(5);
+                }
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -110,6 +135,13 @@ public class PlayerController : MonoBehaviour
                 {
                     agentScript.SetOwlState(AgentTest.OwlState.Moving);
                     agentScript.SetGoal(other.GetComponent<ExhibitInfo>().getOwlPos(this.transform.position));
+                }else if(agentScript.currentOwlExhibit == other.gameObject)
+                {
+                    if(stepAwayTimer > 0)
+                    {
+                        hasSteppedAway = false;
+                        stepAwayTimer = 0;
+                    }
                 }
             }
             else if (SceneLoader.currentMode == SceneLoader.GameMode.PartialControl)
@@ -118,16 +150,31 @@ public class PlayerController : MonoBehaviour
                 {
                     agentScript.SetOwlState(AgentTest.OwlState.Moving);
                     agentScript.SetGoal(other.GetComponent<ExhibitInfo>().getOwlPos(this.transform.position));
+                }else if (agentScript.currentOwlExhibit == other.gameObject)
+                {
+                    if (stepAwayTimer > 0)
+                    {
+                        hasSteppedAway = false;
+                        stepAwayTimer = 0;
+                    }
                 }
             }
             //  owlScript.SetGoal(this.transform);
         }
     }
 
+    
+
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Exhibit"))
         {
+            if(agentScript.currentOwlExhibit == other.gameObject)
+            {
+                hasSteppedAway = true;
+                stepAwayTimer = 5.0f;
+            }
+
             atExhibit = false;
             if (currentExhibit != null)
             {
@@ -138,6 +185,7 @@ public class PlayerController : MonoBehaviour
             {
                 agentScript.SetOwlState(AgentTest.OwlState.Greeting);
             }
+            
             
         }
     }
@@ -157,6 +205,10 @@ public class PlayerController : MonoBehaviour
 
     public void GoToRoom(string room)
     {
+        if(agentScript.currentOwlExhibit != null)
+        {
+            SceneLoader.AddEntryToList(agentScript.currentOwlExhibit.GetComponent<ExhibitInfo>(), agentScript.listenTime, agentScript.cliplength);
+        }
         SceneLoader.Load((SceneLoader.Scene)System.Enum.Parse(typeof(SceneLoader.Scene), room));
     }
 

@@ -98,7 +98,7 @@ public class Outline : MonoBehaviour {
 
     outline.OutlineMode = Mode.OutlineAll;
     outline.OutlineColor = Color.cyan;
-    outline.OutlineWidth = 40f;
+    outline.OutlineWidth = 7f;
 
         outline.enabled = false;
     /*
