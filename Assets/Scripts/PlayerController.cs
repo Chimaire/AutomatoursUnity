@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public bool atExhibit = false;
     public GameObject currentExhibit;
-    public AgentTest agentScript;
+    public OwlLogic agentScript;
     public bool inDoorway = false;
     public InputActionReference callRobotReference = null;
     public InputActionReference startRobotReference = null;
@@ -58,9 +58,9 @@ public class PlayerController : MonoBehaviour
     private void CallOver(InputAction.CallbackContext context)
     {
         GreenButtonAnim.SetTrigger("Press");
-        if (atExhibit && (SceneLoader.currentMode == SceneLoader.GameMode.FullControl) && agentScript.currentState != AgentTest.OwlState.WaitingForPlayerInput)
+        if (atExhibit && (SceneLoader.currentMode == SceneLoader.GameMode.FullControl) && agentScript.currentState != OwlLogic.OwlState.WaitingForPlayerInput)
         {
-            agentScript.SetOwlState(AgentTest.OwlState.Moving);
+            agentScript.SetOwlState(OwlLogic.OwlState.Moving);
             agentScript.SetGoal(currentExhibit.GetComponent<ExhibitInfo>().getOwlPos(this.transform.position));
         }
 
@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
         GreenButtonAnim.SetTrigger("Press");
         if ((SceneLoader.currentMode == SceneLoader.GameMode.FullControl) || (SceneLoader.currentMode == SceneLoader.GameMode.PartialControl))
         {
-            if(agentScript.currentState == AgentTest.OwlState.WaitingForPlayerInput)
+            if(agentScript.currentState == OwlLogic.OwlState.WaitingForPlayerInput)
             {
                 agentScript.StartExplanation(currentExhibit);
             }
@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
         RedButtonAnim.SetTrigger("Press");
         if ((SceneLoader.currentMode == SceneLoader.GameMode.FullControl))
         {
-            if (agentScript.currentState == AgentTest.OwlState.Explaining)
+            if (agentScript.currentState == OwlLogic.OwlState.Explaining)
             {
                 agentScript.StopExplanation();
             }
@@ -131,9 +131,9 @@ public class PlayerController : MonoBehaviour
             if (SceneLoader.currentMode == SceneLoader.GameMode.NoControl)
             {
                 //get the correct owl position from the exhibit
-                if(agentScript.currentState != AgentTest.OwlState.Explaining)
+                if(agentScript.currentState != OwlLogic.OwlState.Explaining)
                 {
-                    agentScript.SetOwlState(AgentTest.OwlState.Moving);
+                    agentScript.SetOwlState(OwlLogic.OwlState.Moving);
                     agentScript.SetGoal(other.GetComponent<ExhibitInfo>().getOwlPos(this.transform.position));
                 }else if(agentScript.currentOwlExhibit == other.gameObject)
                 {
@@ -146,9 +146,9 @@ public class PlayerController : MonoBehaviour
             }
             else if (SceneLoader.currentMode == SceneLoader.GameMode.PartialControl)
             {
-                if (agentScript.currentState != AgentTest.OwlState.Explaining)
+                if (agentScript.currentState != OwlLogic.OwlState.Explaining)
                 {
-                    agentScript.SetOwlState(AgentTest.OwlState.Moving);
+                    agentScript.SetOwlState(OwlLogic.OwlState.Moving);
                     agentScript.SetGoal(other.GetComponent<ExhibitInfo>().getOwlPos(this.transform.position));
                 }else if (agentScript.currentOwlExhibit == other.gameObject)
                 {
@@ -181,9 +181,9 @@ public class PlayerController : MonoBehaviour
                 currentExhibit.GetComponent<ExhibitInfo>().DisableOutline();
             }
             currentExhibit = null;
-            if(agentScript.currentState == AgentTest.OwlState.WaitingForPlayerInput)
+            if(agentScript.currentState == OwlLogic.OwlState.WaitingForPlayerInput)
             {
-                agentScript.SetOwlState(AgentTest.OwlState.Greeting);
+                agentScript.SetOwlState(OwlLogic.OwlState.Greeting);
             }
             
             

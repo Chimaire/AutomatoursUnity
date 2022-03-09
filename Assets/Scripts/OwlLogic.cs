@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AgentTest : MonoBehaviour
+public class OwlLogic : MonoBehaviour
 {
     private bool debug = false;
 
@@ -38,6 +38,10 @@ public class AgentTest : MonoBehaviour
     private float MaxHappyTime = 3;
     private float CurrentHappyTimer = 3;
 
+    public GameObject greetingsClip;
+    private bool isGreeting = false;
+    private bool hasGreeted = true;
+    private IEnumerator coroutine;
     /*
     public Texture2D OwlSad;
     private bool IsSad = false;
@@ -74,8 +78,20 @@ public class AgentTest : MonoBehaviour
         }
     }
 
+    private IEnumerator WaitToGreet()
+    {
+        yield return new WaitForSeconds(3.0f);
+        Greeting();
+    }
+
     void Update()
     {
+        if (!hasGreeted)
+        {
+            coroutine = WaitToGreet();
+            StartCoroutine(coroutine);
+            hasGreeted = true;
+        }
 
         if (Ishappy)
         {
@@ -250,6 +266,24 @@ public class AgentTest : MonoBehaviour
         player.GetComponent<PlayerController>().checkIfListening = true;
     }
 
+    public void Greeting()
+    {
+        if (CurrentAudioInstance != null)
+        {
+            Destroy(CurrentAudioInstance);
+            cliplength = 0.0f;
+        }
+        Debug.Log("Greeting started");
+        SetOwlState(OwlState.Explaining);
+        CurrentAudioInstance = greetingsClip;
+        AudioSource src = CurrentAudioInstance.GetComponent<AudioSource>();
+        src.Play();
+        cliplength = src.clip.length;
+        isGreeting = true;
+        listenTime = 0.0f;
+        listenStopped = false;
+    }
+
     public void StopExplanation()
     {
         Debug.Log("Explanation Stopped");
@@ -257,7 +291,7 @@ public class AgentTest : MonoBehaviour
         Destroy(CurrentAudioInstance);
     }
 
-    public void SetOwlState(AgentTest.OwlState state)
+    public void SetOwlState(OwlLogic.OwlState state)
     {
         if(state == OwlState.Moving && currentState != OwlState.Moving)
         {
@@ -285,6 +319,11 @@ public class AgentTest : MonoBehaviour
             //Owl starts explanation, while waiting for input
             MakeHappy();
             animator.SetTrigger("Talk");
+        }else if(currentState == OwlState.Greeting && state == OwlState.Explaining)
+        {
+            //Owl starts greeting
+            MakeHappy();
+            animator.SetTrigger("Talk");
         }
 
         
@@ -292,9 +331,9 @@ public class AgentTest : MonoBehaviour
             //the owl stopped explaining
             animator.SetTrigger("TalkStop");
             player.GetComponent<PlayerController>().checkIfListening = false;
-            SceneLoader.AddEntryToList(currentOwlExhibit.GetComponent<ExhibitInfo>(), listenTime, cliplength);
+            //SceneLoader.AddEntryToList(currentOwlExhibit.GetComponent<ExhibitInfo>(), listenTime, cliplength);
             cliplength = 0.0f;
-            currentOwlExhibit = null;
+            //currentOwlExhibit = null;
 
             //Debug.Log("TalkStop");
         }

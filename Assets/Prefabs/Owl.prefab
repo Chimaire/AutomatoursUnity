@@ -72,11 +72,15 @@ MonoBehaviour:
   owlHome: {fileID: 0}
   lookSpeed: 7
   animator: {fileID: 1070803544341766012}
+  listenTime: 0
+  cliplength: 0
   currentState: 0
+  currentOwlExhibit: {fileID: 0}
   Owlhead: {fileID: 2100000, guid: 536980dfef067c34e8b0291c9a197ed7, type: 2}
   OwlNeutral: {fileID: 2800000, guid: f0be2e64076fe7240b9bc5ebc91aa2c1, type: 3}
   OwlBlink: {fileID: 2800000, guid: 1294b8decff1dfe47b99ec2d0c0f5064, type: 3}
   OwlHappy: {fileID: 2800000, guid: a4a8153b92e8355419c1c6f094abb5da, type: 3}
+  greetingsClip: {fileID: 5388718239859832758, guid: ca22bf554d078ee48b314006fb39ce61, type: 3}
 --- !u!1001 &5057267081824091353
 PrefabInstance:
   m_ObjectHideFlags: 0

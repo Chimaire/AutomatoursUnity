@@ -1824,6 +1824,7 @@ MonoBehaviour:
   OwlNeutral: {fileID: 0}
   OwlBlink: {fileID: 0}
   OwlHappy: {fileID: 0}
+  greetingsClip: {fileID: 0}
 --- !u!1 &466865041
 GameObject:
   m_ObjectHideFlags: 0
@@ -6423,6 +6424,10 @@ PrefabInstance:
       propertyPath: owlHome
       value: 
       objectReference: {fileID: 521763886}
+    - target: {fileID: 140572638, guid: c0c6a15ae74c35c4da93df7d648426bb, type: 3}
+      propertyPath: greetingsClip
+      value: 
+      objectReference: {fileID: 5388718239859832758, guid: ca22bf554d078ee48b314006fb39ce61, type: 3}
     - target: {fileID: 3354391456476859297, guid: c0c6a15ae74c35c4da93df7d648426bb, type: 3}
       propertyPath: m_Name
       value: Owl
